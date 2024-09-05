@@ -17,7 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({ onClick }) => {
     {
       label: (
         <Badge count={cartItemCount}>
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined style={{ fontSize: '20px' }} />
         </Badge>
       ),
       key: '/cart',
