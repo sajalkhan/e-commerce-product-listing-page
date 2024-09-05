@@ -8,7 +8,7 @@ interface ShowAverageProps {
 }
 
 const ShowAverage: React.FC<ShowAverageProps> = ({ product, size = 'large', color = 'orangered' }) => {
-  const { ratings } = product || {};
+  const { rating } = product || {};
 
   const getFontSize = () => {
     switch (size) {
@@ -23,24 +23,12 @@ const ShowAverage: React.FC<ShowAverageProps> = ({ product, size = 'large', colo
     }
   };
 
-  const calculateAverage = () => {
-    if (ratings && ratings.length > 0) {
-      const total = ratings.reduce((acc: any, rating: any) => acc + (rating.star || 0), 0);
-      const length = ratings.length;
-      const highest = length * 5;
-      return (total * 5) / highest;
-    }
-    return 0;
-  };
-
-  const averageRating = calculateAverage();
-
   return (
     <div className="a-averageRating">
-      {averageRating ? (
+      {rating ? (
         <>
-          <Rate disabled allowHalf value={averageRating} style={{ fontSize: getFontSize(), color: color }} />
-          <span style={{ marginLeft: '5px' }}>{`(${ratings?.length})`}</span>
+          <Rate disabled allowHalf value={rating} style={{ fontSize: getFontSize(), color: color }} />
+          <span style={{ marginLeft: '5px' }}>{`(${rating})`}</span>
         </>
       ) : (
         'No rating yet'
