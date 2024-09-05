@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 import ShowAverage from '@/components/atoms/averageRating';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { useCartStore } from '@/store/useCartStore';
 
 type item = {
   _id: string;
@@ -17,9 +18,14 @@ interface IProductCard {
 
 const ProductCard: React.FC<IProductCard> = ({ item }) => {
   const { title, description, images, price } = item;
+  const { addProduct } = useCartStore();
+
+  const handleAddToCart = () => {
+    addProduct({ ...item, quantity: 1 });
+  };
 
   const actions = [
-    <div key="shopping" className="m-productCard__shopping">
+    <div key="shopping" className="m-productCard__shopping" onClick={handleAddToCart}>
       <ShoppingCartOutlined />
       <p>Add To Cart</p>
     </div>,
